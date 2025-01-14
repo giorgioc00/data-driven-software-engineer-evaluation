@@ -1,7 +1,8 @@
 import os
 import logging
 
-def collect_files():
+
+def pdfs_finder():
     """
     Collects the full paths of all files within the 'data/input' directory.
 
