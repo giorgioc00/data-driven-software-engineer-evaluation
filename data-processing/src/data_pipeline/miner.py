@@ -8,6 +8,15 @@ logger = logging.getLogger(__name__)
 
 def miner():
     files = collect_files()
+    """
+    Entry point of the miner module.
+    Collects PDF file paths using the finder utility, extracts data from each PDF,
+    and logs the total number of processed files.
+
+    :return: list
+        A list containing extracted data from all PDF files found.
+        Each entry in the list is a dictionary with "metadata" and "content" keys.
+    """
     logging.debug(f"Number of files found {len(files)}")
 
     pdfs_extracted_data = []
