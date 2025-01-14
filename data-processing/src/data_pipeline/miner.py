@@ -5,11 +5,18 @@ import PyPDF2
 
 logger = logging.getLogger(__name__)
 
+
 def miner():
     files = collect_files()
     logging.debug(f"Number of files found {len(files)}")
 
-    logging.debug(read_pdf_data(files[0]))
+    pdfs_extracted_data = []
+    for i, file in enumerate(files):
+        pdfs_extracted_data.append(get_pdf_data(files[i]))
+
+    # logging.debug(pdfs_extracted_data)
+    return pdfs_extracted_data
+
 
 def get_pdf_data(file_path):
     """
@@ -28,7 +35,6 @@ def get_pdf_data(file_path):
           the text extracted from a single page.
     """
 
-def read_pdf_data(file_path):
     with open(file_path, 'rb') as file:
         reader = PyPDF2.PdfReader(file)
         logging.debug(f"Number of pages: {len(reader.pages)}")
@@ -49,7 +55,9 @@ def read_pdf_data(file_path):
             "pages_text": pages_text,
         }
 
+        #logging.debug(f"Data extracted from PDF file: {pdf_data}")
         return pdf_data
+
 
 if __name__ == "__main__":
     miner()
