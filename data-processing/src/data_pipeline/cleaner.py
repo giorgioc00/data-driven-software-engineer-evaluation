@@ -12,6 +12,12 @@ def remove_noise_characters(text):
     :param text to be processed
     :return: cleaned text
     """
+    text = re.sub(r"(?<!\w)\s+|\s+(?!\w)", "", text)
+    text = text.replace('●', '')
+    text = text.strip()
+
+    return text
+
 
 def cleaner(pdfs_raw_data):
     """
@@ -23,6 +29,17 @@ def cleaner(pdfs_raw_data):
         - "pages_text": List of text from PDF pages (cleaned)
     :return: list of dict
         Updated data with cleaned text for each page with the same input format.
+    """
+    pdfs_clean_data = []
+    for pdf in pdfs_raw_data:
+        cleaned_pages_text = [remove_noise_characters(text) for text in pdf["pages_text"]]
+        pdfs_clean_data.append({
+            "filename": pdf["filename"],
+            "metadata": pdf["metadata"],
+            "pages_text": cleaned_pages_text,
+        })
+
+    return pdfs_clean_data
 
 
 if __name__ == "__main__":
