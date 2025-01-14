@@ -9,10 +9,12 @@ def remove_new_line_char(text):
 
 
 def cleaner(pdfs_raw_data):
+    """
     pdfs_clean_data = []
     for pdf in pdfs_raw_data:
         cleaned_texts = [remove_new_line_char(text) for text in pdf["pages_text"]]
         pdfs_clean_data.append(cleaned_texts)
+        pdfs_clean_data.append({
 
     return pdfs_clean_data
 
