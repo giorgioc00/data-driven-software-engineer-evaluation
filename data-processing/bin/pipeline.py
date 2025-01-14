@@ -3,6 +3,7 @@ from ..src.data_pipeline.miner import extract_data
 from ..src.data_pipeline.cleaner import clean_data
 from ..src.data_pipeline.transformer import transform_data
 from ..src.data_pipeline.exporter import export_data
+from config.logging_config import setup_logging
 
 def main():
 
