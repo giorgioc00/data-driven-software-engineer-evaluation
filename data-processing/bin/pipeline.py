@@ -1,27 +1,28 @@
-
-from ..src.data_pipeline.miner import extract_data
-from ..src.data_pipeline.cleaner import clean_data
-from ..src.data_pipeline.transformer import transform_data
-from ..src.data_pipeline.exporter import export_data
+import logging
+from src.data_services.miner import miner
+from src.data_services.cleaner import cleaner
+from src.data_services.transformer import transformer
 from config.logging_config import setup_logging
 
-def main():
+def pipeline():
 
     # Step 1: Mining
-    raw_data = extract_data("data/input/pdfs/")
-    print("Step 1: Data extracted.")
+    pdfs_raw_data = miner()
+    logging.info("Step 1: Data mined.")
 
     # Step 2: Cleaning
-    cleaned_data = clean_data(raw_data)
-    print("Step 2: Data cleaned.")
+    pdfs_cleaned_data = cleaner(pdfs_raw_data)
+    logging.info("Step 2: Data cleaned.")
 
     # Step 3: Transformation
-    transformed_data = transform_data(cleaned_data)
+    transformed_data = transformer(pdfs_cleaned_data)
     print("Step 3: Data transformed.")
 
     # Step 4: Exporting
-    export_data(transformed_data, "data/output/processed_data.csv")
-    print("Step 4: Data exported.")
+    #export_data(transformed_data, "data/output/processed_data.csv")
+    #print("Step 4: Data exported.")
 
 if __name__ == "__main__":
-    main()
+    setup_logging()
+    logging.info("Starting the pipeline...")
+    pipeline()
