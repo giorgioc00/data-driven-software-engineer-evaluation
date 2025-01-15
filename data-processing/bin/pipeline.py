@@ -4,6 +4,7 @@ import time
 from src.data_services.miner import miner
 from src.data_services.cleaner import cleaner
 from src.data_services.transformer import transformer
+from src.data_services.db_save import save_to_db
 from src.data_services.exporter import exporter
 from config.logging_config import setup_logging
 
@@ -53,7 +54,10 @@ def pipeline():
         # Step 3: Transformation
         transformed_data = execute_step("3: Transformation", transformer, pdfs_cleaned_data)
 
-        # Step 4: Exporting
+        # Step 4: DB Saver
+        execute_step("4: Db saver", save_to_db, transformed_data)
+
+        # Step 5: Exporting
         execute_step("4: Exporting", exporter, transformed_data, "data/output/processed_data.csv")
 
     except Exception as e:

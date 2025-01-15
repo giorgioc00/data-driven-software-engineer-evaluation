@@ -20,5 +20,7 @@ def transformer(pdfs_cleaned_data):
 
     logging.debug(formatted_data)
 
+    return formatted_data
+
     # logging.debug(formatted_data)
 
