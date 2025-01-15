@@ -5,7 +5,7 @@ from sys import argv
 logger = logging.getLogger(__name__)
 
 
-def remove_noise_characters(text):
+def remove_noise_characters(text: str) -> str:
     """
     Removes noise characters from a string, like new line characters "\n" and spaces inside a word
 
@@ -19,7 +19,7 @@ def remove_noise_characters(text):
     return text
 
 
-def cleaner(pdfs_raw_data):
+def cleaner(pdfs_raw_data: list) -> list[dict]:
     """
     Cleans text data from PDF pages by removing noise by updating each element of the 'pages_text' list.
 
