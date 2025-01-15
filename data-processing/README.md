@@ -9,7 +9,7 @@ Installation
 ------------
 1. Clone the repository:
    `git clone https://github.com/giorgioc00/data-driven-software-engineer-evaluation.git`
-2. Got to the project dir: `cd data-driven-software-engineer-evaluation/data-processing`
+2. Navigate to the project dir: `cd data-driven-software-engineer-evaluation/data-processing`
 
 3. Create a virtual environment:
    `python3 -m venv venv` - on Unix-like OS
