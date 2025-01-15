@@ -5,7 +5,6 @@ from src.data_services.miner import miner
 from src.data_services.cleaner import cleaner
 from src.data_services.transformer import transformer
 from src.data_services.db_save import save_to_db
-from src.data_services.exporter import exporter
 from config.logging_config import setup_logging
 
 
@@ -39,7 +38,7 @@ def pipeline():
     1. Mining: Extracts raw data from source files (PDFs)
     2. Cleaning: Processes and removes noise from the raw data
     3. Transformation: Applies transformations to prepare data for export
-    4. Exporting: Saves the transformed data to an output CSV file
+    4. DB Saving: Saves the transformed data on the SQL database,
 
     :return: dict
         A dictionary containing the export status and some useful information
@@ -57,8 +56,6 @@ def pipeline():
         # Step 4: DB Saving
         execute_step("4: Db saver", save_to_db, transformed_data)
 
-        # Step 5: Exporting
-        execute_step("4: Exporting", exporter, transformed_data, "data/output/processed_data.csv")
 
     except Exception as e:
         logging.critical(f"Pipeline execution failed with error: {e}")
