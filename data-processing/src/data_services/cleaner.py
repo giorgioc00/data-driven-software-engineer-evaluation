@@ -32,12 +32,15 @@ def cleaner(pdfs_raw_data: list) -> list[dict]:
     """
     pdfs_clean_data = []
     for pdf in pdfs_raw_data:
-        cleaned_pages_text = [remove_noise_characters(text) for text in pdf["pages_text"]]
-        pdfs_clean_data.append({
-            "filename": pdf["filename"],
-            "metadata": pdf["metadata"],
-            "pages_text": cleaned_pages_text,
-        })
+        if isinstance(pdf, dict):
+            cleaned_pages_text = [remove_noise_characters(text) for text in pdf["pages_text"]]
+            pdfs_clean_data.append({
+                "filename": pdf["filename"],
+                "metadata": pdf["metadata"],
+                "pages_text": cleaned_pages_text,
+            })
+        else:
+            logging.error("nah")
 
     return pdfs_clean_data
 
