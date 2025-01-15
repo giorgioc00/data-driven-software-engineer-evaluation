@@ -2,6 +2,7 @@ import logging
 from src.data_services.miner import miner
 from src.data_services.cleaner import cleaner
 from src.data_services.transformer import transformer
+from src.data_services.exporter import exporter
 from config.logging_config import setup_logging
 
 def pipeline():
@@ -16,11 +17,11 @@ def pipeline():
 
     # Step 3: Transformation
     transformed_data = transformer(pdfs_cleaned_data)
-    print("Step 3: Data transformed.")
+    logging.info("Step 3: Data transformed.")
 
     # Step 4: Exporting
-    #export_data(transformed_data, "data/output/processed_data.csv")
-    #print("Step 4: Data exported.")
+    exporter(transformed_data, "data/output/processed_data.csv")
+    logging.info("Step 4: Data exported.")
 
 if __name__ == "__main__":
     setup_logging()
