@@ -19,6 +19,10 @@ def remove_noise_characters(text: str) -> str:
     return text
 
 
+def clean_metadata(metadata):
+    return {key.lstrip('/'): value for key, value in metadata.items()}
+
+
 def cleaner(pdfs_raw_data: list) -> list[dict]:
     """
     Cleans text data from PDF pages by removing noise by updating each element of the 'pages_text' list.
@@ -36,7 +40,7 @@ def cleaner(pdfs_raw_data: list) -> list[dict]:
             cleaned_pages_text = [remove_noise_characters(text) for text in pdf["pages_text"]]
             pdfs_clean_data.append({
                 "filename": pdf["filename"],
-                "metadata": pdf["metadata"],
+                "metadata": clean_metadata(pdf["metadata"]),
                 "pages_text": cleaned_pages_text,
             })
         else:
