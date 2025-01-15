@@ -1,4 +1,52 @@
-# Data processing
+# PDF Data Processing
+
+This project provides an easy solution to extract, clean, transform, and export data from a collection of PDF files.
+It is designed to process a large number of PDF files,
+with an emphasis error handling and scalability.
+
+
+Installation
+------------
+1. Clone the repository:
+   git clone https://github.com/giorgioc00/data-driven-software-engineer-evaluation.git
+2. Got to the project dir: cd data-driven-software-engineer-evaluation/data-processing
+
+3. Create a virtual environment:
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+4. Install dependencies:
+   pip install -r requirements.txt
+
+Usage
+-----
+1. Go to the `.data/input/pdfs` directory
+   and place the PDF files that need to be processed in that folder.
+
+2. Run the Pipeline:
+   python3 -m bin.pipeline
+
+   This will:
+   - Extract data from the PDFs in the `./pdfs` folder.
+   - Clean the extracted data to remove any unwanted characters or formatting issues.
+   - Transform the cleaned data into a structured format.
+   - Store all the extracted data in a SQlite database
+   - Export the final processed data to `data/output/processed_data.csv`.
+
+Logging
+-------
+The project uses Python's built-in `logging` module to track the progress of the data processing steps. The logs include information such as:
+- The number of files processed
+- Errors encountered during extraction, cleaning, or transformation
+- Execution time for each step
+
+Logs are written to `var/main.log`, with different log levels (e.g., `INFO`, `ERROR`, `CRITICAL`).
+   
+
+
+# Assignment details
+
+## Data processing
 
 In the `./pdfs` folder you will find a set of PDF files containing data that needs to be processed.
 Your task is to extract the data from these PDFs and store it in a structured format for further analysis.
