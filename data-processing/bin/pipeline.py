@@ -8,6 +8,15 @@ from config.logging_config import setup_logging
 
 
 def execute_step(step_name, step_function, *args, **kwargs):
+    """
+    Executes a pipeline step and handles errors specific to that step.
+
+    :param step_name: The name of the pipeline step
+    :param step_function: The function to execute for the step
+    :param args: Positional arguments to pass to the step function
+    :param kwargs: Keyword arguments to pass to the step function
+    :return: The result of the step function if successful
+    """
     try:
         result = step_function(*args, **kwargs)
         logging.info(f"Step {step_name}: Completed successfully.")
@@ -18,6 +27,18 @@ def execute_step(step_name, step_function, *args, **kwargs):
 
 
 def pipeline():
+    """
+    Executes the complete data processing pipeline.
+
+    Steps:
+    1. Mining: Extracts raw data from source files (PDFs)
+    2. Cleaning: Processes and removes noise from the raw data
+    3. Transformation: Applies transformations to prepare data for export
+    4. Exporting: Saves the transformed data to an output CSV file
+
+    :return: dict
+        A dictionary containing the export status and some useful information
+    """
     try:
         # Step 1: Mining
         pdfs_raw_data = execute_step("1: Mining", miner)
