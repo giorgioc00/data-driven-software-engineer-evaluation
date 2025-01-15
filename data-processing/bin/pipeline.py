@@ -1,5 +1,6 @@
 import logging
 import traceback
+import time
 from src.data_services.miner import miner
 from src.data_services.cleaner import cleaner
 from src.data_services.transformer import transformer
@@ -18,8 +19,11 @@ def execute_step(step_name, step_function, *args, **kwargs):
     :return: The result of the step function if successful
     """
     try:
+        start_step_exec = time.time()
         result = step_function(*args, **kwargs)
-        logging.info(f"Step {step_name}: Completed successfully.")
+        end_step_exec = time.time()
+        logging.info(f"Step {step_name}: Completed successfully in {round((end_step_exec - start_step_exec)
+                                                                          * 1000, 2)} ms.")
         return result
     except Exception as e:
         logging.error(f"Error in Step {step_name}: {e}")
