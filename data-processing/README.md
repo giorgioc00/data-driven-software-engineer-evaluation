@@ -1,14 +1,13 @@
 # PDF Data Processing
 
-This project provides an easy solution to extract, clean, transform, and export data from a collection of PDF files.
-It is designed to process a large number of PDF files,
-with an emphasis error handling and scalability.
+This project provides an easy and fast solutions to extract data from provided PDFs files.
+It focuses on scalability and can handle errors or corrupted PDF files without compromising the data extraction process.
 
 
 Installation
 ------------
 1. Clone the repository:
-   git clone https://github.com/giorgioc00/data-driven-software-engineer-evaluation.git
+   `git clone https://github.com/giorgioc00/data-driven-software-engineer-evaluation.git`
 2. Got to the project dir: cd data-driven-software-engineer-evaluation/data-processing
 
 3. Create a virtual environment:
@@ -16,7 +15,7 @@ Installation
    source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 4. Install dependencies:
-   pip install -r requirements.txt
+   `pip install -r requirements.txt`
 
 Usage
 -----
@@ -24,14 +23,18 @@ Usage
    and place the PDF files that need to be processed in that folder.
 
 2. Run the Pipeline as module:
-   python3 -m bin.pipeline
+   `python3 -m bin.pipeline`
 
    This will:
    - Extract data from the PDFs in the `./pdfs` folder.
    - Clean the extracted data to remove any unwanted characters or formatting issues.
    - Transform the cleaned data into a structured format.
-   - Store all the new extracted data in a SQlite database
+   - Store all the new extracted data in a SQlite database 
    - Export the final processed data to `data/output/processed_data.csv`.
+
+Then for the analysis of the collected data is possible direct to query the database or the exported CSV file.
+
+
 
 Logging
 -------
