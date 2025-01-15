@@ -61,6 +61,7 @@ def pipeline():
     return {
         "success": True,
         "pdf_processed": len(transformed_data),
+        "pdf_failed_to_process": len(pdfs_raw_data) - len(transformed_data),
         "pages_mined": sum(len(data["pages_text_list"]) for data in transformed_data)
     }
 
