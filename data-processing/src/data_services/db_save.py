@@ -29,13 +29,18 @@ session = Session()
 
 def save_to_db(data):
     """
-    Save transformed PDF data to the database.
+    Save transformed PDF data to the database if the file doesn't already exist.
 
     :param data: list
         Transformed data containing PDF information.
     """
     try:
         for pdf_data in data:
+            existing_entry = session.query(PDFContent).filter_by(filename=pdf_data["filename"]).first()
+            if existing_entry:
+                logging.info(f"Data for {pdf_data['filename']} already exists in the database. Skipping...")
+                continue
+
             flattened_text = "\n".join(
                 ["\n".join(page) for page in pdf_data["pages_text_list"]]
             )
