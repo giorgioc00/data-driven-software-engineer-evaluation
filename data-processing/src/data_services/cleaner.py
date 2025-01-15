@@ -43,8 +43,6 @@ def cleaner(pdfs_raw_data: list) -> list[dict]:
                 "metadata": clean_metadata(pdf["metadata"]),
                 "pages_text": cleaned_pages_text,
             })
-        else:
-            logging.error("nah")
 
     return pdfs_clean_data
 
