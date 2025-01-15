@@ -23,20 +23,22 @@ Usage
 1. Go to the `.data/input/pdfs` directory
    and place the PDF files that need to be processed in that folder.
 
-2. Run the Pipeline:
+2. Run the Pipeline as module:
    python3 -m bin.pipeline
 
    This will:
    - Extract data from the PDFs in the `./pdfs` folder.
    - Clean the extracted data to remove any unwanted characters or formatting issues.
    - Transform the cleaned data into a structured format.
-   - Store all the extracted data in a SQlite database
+   - Store all the new extracted data in a SQlite database
    - Export the final processed data to `data/output/processed_data.csv`.
 
 Logging
 -------
 The project uses Python's built-in `logging` module to track the progress of the data processing steps. The logs include information such as:
-- The number of files processed
+- The number of files processed or failed to process
+- The number of pages processed
+- The total length of the text extracted
 - Errors encountered during extraction, cleaning, or transformation
 - Execution time for each step
 
