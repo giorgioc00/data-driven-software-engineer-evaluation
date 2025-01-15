@@ -1,18 +1,19 @@
 # PDF Data Processing
 
-This project provides an easy and fast solutions to extract data from provided PDFs files.
+This project provides an easy and fast solutions to extract text data from provided PDFs files.
 It focuses on scalability and can handle errors or corrupted PDF files without compromising the data extraction process.
+The data is then made available for analysis on a SQLite DB table.
 
 
 Installation
 ------------
 1. Clone the repository:
    `git clone https://github.com/giorgioc00/data-driven-software-engineer-evaluation.git`
-2. Got to the project dir: cd data-driven-software-engineer-evaluation/data-processing
+2. Got to the project dir: `cd data-driven-software-engineer-evaluation/data-processing`
 
 3. Create a virtual environment:
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   `python3 -m venv venv` - on Unix-like OS
+   `source venv/bin/activate`  - On Windows: `venv\Scripts\activate`
 
 4. Install dependencies:
    `pip install -r requirements.txt`
@@ -29,10 +30,12 @@ Usage
    - Extract data from the PDFs in the `./pdfs` folder.
    - Clean the extracted data to remove any unwanted characters or formatting issues.
    - Transform the cleaned data into a structured format.
-   - Store all the new extracted data in a SQlite database 
-   - Export the final processed data to `data/output/processed_data.csv`.
+   - Store all the new extracted data in a SQlite database (located at `.var/db/pdfs.db`)
 
-Then for the analysis of the collected data is possible direct to query the database or the exported CSV file.
+For analyzing the collected data, you can directly query the database table named `pdf_content`.
+
+N.B., A file has only one record on the table and the file name is used as identification of it, running the app
+different times on the same files will not create duplicated entries on the DB table.
 
 
 
@@ -42,7 +45,7 @@ The project uses Python's built-in `logging` module to track the progress of the
 - The number of files processed or failed to process
 - The number of pages processed
 - The total length of the text extracted
-- Errors encountered during extraction, cleaning, or transformation
+- Errors encountered during extraction, cleaning, transformation and database operations
 - Execution time for each step
 
 Logs are written to `var/main.log`, with different log levels (e.g., `INFO`, `ERROR`, `CRITICAL`).
