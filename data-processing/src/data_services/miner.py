@@ -2,6 +2,7 @@ from ..utils.finder import pdfs_finder
 import os
 import logging
 import PyPDF2
+from PyPDF2.errors import PyPdfError
 
 
 logger = logging.getLogger(__name__)
@@ -45,30 +46,38 @@ def get_pdf_data(file_path):
         - "content" (list): A list of strings where each entry corresponds to
           the text extracted from a single page.
     """
-    with open(file_path, 'rb') as file:
-        reader = PyPDF2.PdfReader(file)
-        logging.debug(f"Number of pages: {len(reader.pages)}")
+    try:
+        with open(file_path, 'rb') as file:
+            reader = PyPDF2.PdfReader(file)
+            logging.debug(f"Number of pages: {len(reader.pages)}")
 
-        # Extract metadata
-        meta = reader.metadata
+            # Extract metadata
+            meta = reader.metadata
 
-        # Extract text from all pages
-        pages_text = []
-        for i, page in enumerate(reader.pages):
-            page_text = page.extract_text()
-            pages_text.append(page_text)
+            # Extract text from all pages
+            pages_text = []
+            for i, page in enumerate(reader.pages):
+                page_text = page.extract_text()
+                pages_text.append(page_text)
 
-            logging.debug(f"Text extracted from page {i + 1}")
-            logging.info(f"Number of text found {len(page_text)}")
+                logging.debug(f"Text extracted from page {i + 1}")
+                logging.info(f"Number of text found {len(page_text)}")
 
-        pdf_data = {
-            "filename": os.path.basename(file_path),
-            "metadata": meta,
-            "pages_text": pages_text,
-        }
+            pdf_data = {
+                "filename": os.path.basename(file_path),
+                "metadata": meta,
+                "pages_text": pages_text,
+            }
 
-        # logging.debug(f"Data extracted from PDF file: {pdf_data}")
-        return pdf_data
+            # logging.debug(f"Data extracted from PDF file: {pdf_data}")
+            return pdf_data
+
+    except PyPdfError as e:
+        logging.error(f"Failed to read PDF file {os.path.basename(file_path)}: {e}")
+        return None
+    except Exception as e:
+        logging.error(f"An unexpected error occurred while processing {os.path.basename(file_path)}: {e}")
+        return None
 
 
 if __name__ == "__main__":
