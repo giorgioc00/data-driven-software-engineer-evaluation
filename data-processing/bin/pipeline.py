@@ -54,7 +54,7 @@ def pipeline():
         # Step 3: Transformation
         transformed_data = execute_step("3: Transformation", transformer, pdfs_cleaned_data)
 
-        # Step 4: DB Saver
+        # Step 4: DB Saving
         execute_step("4: Db saver", save_to_db, transformed_data)
 
         # Step 5: Exporting

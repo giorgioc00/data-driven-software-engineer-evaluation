@@ -34,7 +34,7 @@ def get_pdf_data(file_path):
     """
     Extracts data from a PDF file, including metadata and text content.
 
-    This function retrieves the metadata of the PDF file (e.g., author, title)
+    This function get the metadata of the PDF file (e.g., author, title)
     and extracts text from all pages of the document. The extracted text is
     organized page by page.
 
