@@ -15,7 +15,7 @@ class PDFContent(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     filename = Column(String, nullable=False)
     pdf_metadata = Column(Text, nullable=True)
-    text_content = Column(Text, nullable=False)
+    pages_text_content = Column(Text, nullable=False)
 
 
 # Database setup
@@ -41,14 +41,12 @@ def save_to_db(data):
                 logging.info(f"Data for {pdf_data['filename']} already exists in the database. Skipping...")
                 continue
 
-            flattened_text = "\n".join(
-                ["\n".join(page) for page in pdf_data["pages_text_list"]]
-            )
-
+            text_content_data_json = json.dumps(pdf_data["pages_text_list"])
+            logging.debug(text_content_data_json)
             pdf_entry = PDFContent(
                 filename=pdf_data["filename"],
                 pdf_metadata=str(pdf_data["metadata"]),
-                text_content=flattened_text,
+                pages_text_content=text_content_data_json,
             )
             session.add(pdf_entry)
 
